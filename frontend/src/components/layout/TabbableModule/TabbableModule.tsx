@@ -134,7 +134,7 @@ const TabbableModule = ({
                     <Flex align='center' gap='1' className='shrink-0 pb-1'>
                         {isLoading && <Spinner size='1' aria-label='Loading channel tabs' />}
                         {trailingActions}
-                        {canManage && !activeTab.required && (
+                        {!activeTab.required && (
                             <DropdownMenu.Root>
                                 <Tooltip content={`Manage ${activeTab.label} tab`}>
                                     <DropdownMenu.Trigger>
@@ -147,13 +147,17 @@ const TabbableModule = ({
                                     <DropdownMenu.Item onSelect={() => void copyTabLink()}>
                                         <FrappeIcon name='copy' /> Copy link to tab
                                     </DropdownMenu.Item>
-                                    <DropdownMenu.Item onSelect={() => setTabPendingRename(activeTab)}>
-                                        <FrappeIcon name='pencil' /> Rename
-                                    </DropdownMenu.Item>
-                                    <DropdownMenu.Separator />
-                                    <DropdownMenu.Item color='red' onSelect={() => setTabPendingRemoval(activeTab)}>
-                                        <FrappeIcon name='trash-2' /> Remove tab
-                                    </DropdownMenu.Item>
+                                    {canManage && (
+                                        <>
+                                            <DropdownMenu.Item onSelect={() => setTabPendingRename(activeTab)}>
+                                                <FrappeIcon name='pencil' /> Rename
+                                            </DropdownMenu.Item>
+                                            <DropdownMenu.Separator />
+                                            <DropdownMenu.Item color='red' onSelect={() => setTabPendingRemoval(activeTab)}>
+                                                <FrappeIcon name='trash-2' /> Remove tab
+                                            </DropdownMenu.Item>
+                                        </>
+                                    )}
                                 </DropdownMenu.Content>
                             </DropdownMenu.Root>
                         )}
