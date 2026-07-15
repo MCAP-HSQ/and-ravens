@@ -1,20 +1,11 @@
 import { Box, Flex, Text, Tooltip } from '@radix-ui/themes'
 import { useFrappeGetCall } from 'frappe-react-sdk'
 import { useContext, useMemo } from 'react'
-import {
-    LuActivity,
-    LuBot,
-    LuCalendarDays,
-    LuFiles,
-    LuLayoutGrid,
-    LuMessageSquare,
-    LuPhone,
-    LuSettings,
-} from 'react-icons/lu'
 import { NavLink, useLocation, useParams } from 'react-router-dom'
 import clsx from 'clsx'
 import { ChannelListContext, ChannelListContextType } from '@/utils/channel/ChannelListProvider'
 import { __ } from '@/utils/translations'
+import FrappeIcon from '@/components/icons/FrappeIcon'
 
 type AppRailItem = {
     label: string
@@ -55,13 +46,13 @@ const AppRail = () => {
     const isChatRoute = !workspaceSection || !['activity', 'calendar', 'calls', 'files', 'ai', 'apps'].includes(workspaceSection)
 
     const items: AppRailItem[] = [
-        { label: 'Activity', path: `${base}/activity`, icon: <LuActivity size={APP_ICON_SIZE} />, badge: mentionsCount?.message },
-        { label: 'Chat', path: chatPath, icon: <LuMessageSquare size={APP_ICON_SIZE} />, active: isChatRoute },
-        { label: 'Calendar', path: `${base}/calendar`, icon: <LuCalendarDays size={APP_ICON_SIZE} /> },
-        { label: 'Calls', path: `${base}/calls`, icon: <LuPhone size={APP_ICON_SIZE} /> },
-        { label: 'Files', path: `${base}/files`, icon: <LuFiles size={APP_ICON_SIZE} /> },
-        { label: 'AI', path: `${base}/ai`, icon: <LuBot size={APP_ICON_SIZE} /> },
-        { label: 'Apps', path: `${base}/apps`, icon: <LuLayoutGrid size={APP_ICON_SIZE} /> },
+        { label: 'Activity', path: `${base}/activity`, icon: <FrappeIcon name='activity' size={APP_ICON_SIZE} />, badge: mentionsCount?.message },
+        { label: 'Chat', path: chatPath, icon: <FrappeIcon name='message-square' size={APP_ICON_SIZE} />, active: isChatRoute },
+        { label: 'Calendar', path: `${base}/calendar`, icon: <FrappeIcon name='calendar-days' size={APP_ICON_SIZE} /> },
+        { label: 'Calls', path: `${base}/calls`, icon: <FrappeIcon name='phone' size={APP_ICON_SIZE} /> },
+        { label: 'Files', path: `${base}/files`, icon: <FrappeIcon name='files' size={APP_ICON_SIZE} /> },
+        { label: 'AI', path: `${base}/ai`, icon: <FrappeIcon name='bot' size={APP_ICON_SIZE} /> },
+        { label: 'Apps', path: `${base}/apps`, icon: <FrappeIcon name='layout-grid' size={APP_ICON_SIZE} /> },
     ]
 
     return (
@@ -90,7 +81,7 @@ const AppRail = () => {
             <AppRailLink item={{
                 label: 'Settings',
                 path: '/settings',
-                icon: <LuSettings size={APP_ICON_SIZE} />,
+                icon: <FrappeIcon name='settings' size={APP_ICON_SIZE} />,
             }} />
         </Flex>
     )

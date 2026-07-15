@@ -2,7 +2,7 @@ import { Badge, Box, Button, Flex, Grid, Text } from '@radix-ui/themes'
 import { useFrappeGetDocList } from 'frappe-react-sdk'
 import dayjs from 'dayjs'
 import { useMemo, useState } from 'react'
-import { LuChevronLeft, LuChevronRight, LuExternalLink, LuVideo } from 'react-icons/lu'
+import FrappeIcon from '@/components/icons/FrappeIcon'
 import HubPage from '@/components/layout/HubPage'
 import { ErrorBanner } from '@/components/layout/AlertBanner/ErrorBanner'
 import { Loader } from '@/components/common/Loader'
@@ -38,13 +38,13 @@ const CalendarPage = () => {
         <HubPage
             title='Calendar'
             description='Frappe events and Google Meet links, in the same workspace as your conversations.'
-            actions={<Button asChild variant='soft'><a href='/app/event' target='_blank' rel='noreferrer'>Open event list <LuExternalLink /></a></Button>}
+            actions={<Button asChild variant='soft'><a href='/app/event' target='_blank' rel='noreferrer'>Open event list <FrappeIcon name='external-link' /></a></Button>}
         >
             <Flex align='center' justify='between' mb='4'>
                 <Flex align='center' gap='2'>
-                    <Button variant='soft' color='gray' onClick={() => setCursor((value) => value.subtract(1, 'month'))} aria-label='Previous month'><LuChevronLeft /></Button>
+                    <Button variant='soft' color='gray' onClick={() => setCursor((value) => value.subtract(1, 'month'))} aria-label='Previous month'><FrappeIcon name='chevron-left' /></Button>
                     <Button variant='soft' color='gray' onClick={() => setCursor(dayjs().startOf('month'))}>Today</Button>
-                    <Button variant='soft' color='gray' onClick={() => setCursor((value) => value.add(1, 'month'))} aria-label='Next month'><LuChevronRight /></Button>
+                    <Button variant='soft' color='gray' onClick={() => setCursor((value) => value.add(1, 'month'))} aria-label='Next month'><FrappeIcon name='chevron-right' /></Button>
                 </Flex>
                 <Text size='4' weight='bold' className='cal-sans'>{cursor.format('MMMM YYYY')}</Text>
             </Flex>
@@ -80,7 +80,7 @@ const CalendarPage = () => {
 const EventChip = ({ event }: { event: EventRecord }) => (
     <a href={event.google_meet_link || `/app/event/${event.name}`} target='_blank' rel='noreferrer' className='block truncate rounded-md bg-accent-3 px-2 py-1 text-accent-12 hover:bg-accent-4'>
         <Flex align='center' gap='1'>
-            {event.google_meet_link && <LuVideo size={11} />}
+            {event.google_meet_link && <FrappeIcon name='video' size={11} />}
             <Text size='1' weight='medium' className='truncate'>{event.all_day ? '' : `${dayjs(event.starts_on).format('HH:mm')} `}{event.subject}</Text>
             {event.status === 'Cancelled' && <Badge size='1' color='red'>Cancelled</Badge>}
         </Flex>

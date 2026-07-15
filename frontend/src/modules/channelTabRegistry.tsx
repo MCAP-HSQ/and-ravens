@@ -8,8 +8,8 @@ import { Component as CalendarPage } from '@/pages/hub/CalendarPage'
 import { Component as CallsPage } from '@/pages/hub/CallsPage'
 import { Component as AIPage } from '@/pages/hub/AIPage'
 import { Component as AppsPage } from '@/pages/hub/AppsPage'
-import { LuActivity, LuBot, LuCalendarDays, LuLayoutGrid, LuPhone } from 'react-icons/lu'
 import { ReactNode } from 'react'
+import FrappeIcon from '@/components/icons/FrappeIcon'
 
 const moduleFrame = (content: ReactNode) => (
     <Box className='h-screen overflow-hidden pt-24 [&>div]:h-[calc(100vh-6rem)]'>
@@ -44,7 +44,8 @@ export const getChannelTabRegistry = (channelData: ChannelListItem): TabbableMod
         id: 'activity',
         label: 'Activity',
         description: 'Mentions, unread work and recent channel activity.',
-        icon: <LuActivity size={16} />,
+        icon: <FrappeIcon name='activity' />,
+        kind: 'static',
         render: () => moduleFrame(<ActivityPage />),
         panelClassName: 'h-screen overflow-hidden',
     },
@@ -52,7 +53,8 @@ export const getChannelTabRegistry = (channelData: ChannelListItem): TabbableMod
         id: 'calendar',
         label: 'Calendar',
         description: 'Events and meeting links from Frappe Calendar.',
-        icon: <LuCalendarDays size={16} />,
+        icon: <FrappeIcon name='calendar-days' />,
+        kind: 'static',
         render: () => moduleFrame(<CalendarPage />),
         panelClassName: 'h-screen overflow-hidden',
     },
@@ -60,7 +62,8 @@ export const getChannelTabRegistry = (channelData: ChannelListItem): TabbableMod
         id: 'calls',
         label: 'Calls',
         description: 'Start and rejoin channel meetings.',
-        icon: <LuPhone size={16} />,
+        icon: <FrappeIcon name='phone' />,
+        kind: 'static',
         render: () => moduleFrame(<CallsPage />),
         panelClassName: 'h-screen overflow-hidden',
     },
@@ -68,7 +71,8 @@ export const getChannelTabRegistry = (channelData: ChannelListItem): TabbableMod
         id: 'ai',
         label: 'AI',
         description: 'Open an And Ravens AI agent inside this channel.',
-        icon: <LuBot size={16} />,
+        icon: <FrappeIcon name='bot' />,
+        kind: 'static',
         render: () => moduleFrame(<AIPage />),
         panelClassName: 'h-screen overflow-hidden',
     },
@@ -76,7 +80,8 @@ export const getChannelTabRegistry = (channelData: ChannelListItem): TabbableMod
         id: 'apps',
         label: 'Apps',
         description: 'Launch the collaboration tools connected to this workspace.',
-        icon: <LuLayoutGrid size={16} />,
+        icon: <FrappeIcon name='layout-grid' />,
+        kind: 'static',
         render: () => moduleFrame(<AppsPage />),
         panelClassName: 'h-screen overflow-hidden',
     },

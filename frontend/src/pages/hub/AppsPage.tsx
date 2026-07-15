@@ -1,6 +1,6 @@
 import { Badge, Box, Button, Flex, Grid, Text } from '@radix-ui/themes'
 import { ReactNode } from 'react'
-import { LuBot, LuCalendarDays, LuCheckCheck, LuFileText, LuFiles, LuMessageSquare, LuSettings, LuVideo } from 'react-icons/lu'
+import FrappeIcon from '@/components/icons/FrappeIcon'
 import { Link, useParams } from 'react-router-dom'
 import HubPage from '@/components/layout/HubPage'
 
@@ -16,14 +16,14 @@ type AppCard = {
 const AppsPage = () => {
     const { workspaceID } = useParams()
     const apps: AppCard[] = [
-        { name: 'Chat', description: 'Channels, direct messages, threads, rich text, files, mentions and reactions.', icon: <LuMessageSquare />, path: `/${workspaceID}`, status: 'Built in' },
-        { name: 'Calendar', description: 'View Frappe events and join linked Google Meet sessions.', icon: <LuCalendarDays />, path: `/${workspaceID}/calendar`, status: 'Connected' },
-        { name: 'Meetings', description: 'Create an instant Google Meet for everyone in a Raven channel.', icon: <LuVideo />, path: `/${workspaceID}/calls`, status: 'Connected' },
-        { name: 'Files', description: 'Search documents and images shared across conversations.', icon: <LuFiles />, path: `/${workspaceID}/files`, status: 'Built in' },
-        { name: 'AI agents', description: 'Use Raven bots for summaries, retrieval and Frappe actions.', icon: <LuBot />, path: `/${workspaceID}/ai`, status: 'Built in' },
-        { name: 'Approvals', description: 'Review pending Frappe workflow actions and decisions.', icon: <LuCheckCheck />, path: '/app/workflow-action', external: true, status: 'Frappe' },
-        { name: 'Notes', description: 'Open Frappe notes alongside your team conversations.', icon: <LuFileText />, path: '/app/note', external: true, status: 'Frappe' },
-        { name: 'Administration', description: 'Manage workspaces, people, integrations, notifications and automation.', icon: <LuSettings />, path: '/settings', status: 'Admin' },
+        { name: 'Chat', description: 'Channels, direct messages, threads, rich text, files, mentions and reactions.', icon: <FrappeIcon name='message-square' />, path: `/${workspaceID}`, status: 'Built in' },
+        { name: 'Calendar', description: 'View Frappe events and join linked Google Meet sessions.', icon: <FrappeIcon name='calendar-days' />, path: `/${workspaceID}/calendar`, status: 'Connected' },
+        { name: 'Meetings', description: 'Create an instant Google Meet for everyone in a Raven channel.', icon: <FrappeIcon name='video' />, path: `/${workspaceID}/calls`, status: 'Connected' },
+        { name: 'Files', description: 'Search documents and images shared across conversations.', icon: <FrappeIcon name='files' />, path: `/${workspaceID}/files`, status: 'Built in' },
+        { name: 'AI agents', description: 'Use Raven bots for summaries, retrieval and Frappe actions.', icon: <FrappeIcon name='bot' />, path: `/${workspaceID}/ai`, status: 'Built in' },
+        { name: 'Approvals', description: 'Review pending Frappe workflow actions and decisions.', icon: <FrappeIcon name='check-check' />, path: '/app/workflow-action', external: true, status: 'Frappe' },
+        { name: 'Notes', description: 'Open Frappe notes alongside your team conversations.', icon: <FrappeIcon name='file-text' />, path: '/app/note', external: true, status: 'Frappe' },
+        { name: 'Administration', description: 'Manage workspaces, people, integrations, notifications and automation.', icon: <FrappeIcon name='settings' />, path: '/settings', status: 'Admin' },
     ]
 
     return (

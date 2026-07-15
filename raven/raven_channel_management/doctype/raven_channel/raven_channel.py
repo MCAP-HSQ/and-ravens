@@ -43,6 +43,9 @@ class RavenChannel(Document):
 	# end: auto-generated types
 
 	def on_trash(self):
+		# delete all installed channel tabs
+		frappe.db.delete("Raven Channel Tab", {"channel_id": self.name})
+
 		# delete all members when channel is deleted
 		frappe.db.delete("Raven Channel Member", {"channel_id": self.name})
 

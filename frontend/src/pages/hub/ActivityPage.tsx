@@ -2,7 +2,7 @@ import { Box, Flex, Grid, Text } from '@radix-ui/themes'
 import { useFrappePostCall } from 'frappe-react-sdk'
 import parse from 'html-react-parser'
 import { Link, useParams } from 'react-router-dom'
-import { LuActivity, LuAtSign, LuMessageSquareText } from 'react-icons/lu'
+import FrappeIcon from '@/components/icons/FrappeIcon'
 import HubPage from '@/components/layout/HubPage'
 import { ErrorBanner } from '@/components/layout/AlertBanner/ErrorBanner'
 import { Loader } from '@/components/common/Loader'
@@ -46,9 +46,9 @@ const ActivityPage = () => {
     return (
         <HubPage title='Activity' description='Mentions and unread work that need your attention, collected across the workspace.'>
             <Grid columns={{ initial: '1', sm: '3' }} gap='3' mb='7'>
-                <ActivityStat icon={<LuActivity />} label='Unread messages' value={unreadMessages} />
-                <ActivityStat icon={<LuMessageSquareText />} label='Thread replies' value={threadCount} />
-                <ActivityStat icon={<LuAtSign />} label='Recent mentions' value={data?.message.length ?? 0} />
+                <ActivityStat icon={<FrappeIcon name='activity' />} label='Unread messages' value={unreadMessages} />
+                <ActivityStat icon={<FrappeIcon name='message-square-text' />} label='Thread replies' value={threadCount} />
+                <ActivityStat icon={<FrappeIcon name='at-sign' />} label='Recent mentions' value={data?.message.length ?? 0} />
             </Grid>
 
             <Flex align='center' justify='between' mb='3'>
@@ -59,7 +59,7 @@ const ActivityPage = () => {
             <Box className='overflow-hidden rounded-xl border border-gray-4 bg-gray-1 dark:border-gray-6 dark:bg-gray-1'>
                 {!isLoading && data?.message.length === 0 && (
                     <Flex direction='column' align='center' justify='center' className='min-h-64 px-6 text-center'>
-                        <LuAtSign size={34} className='mb-3 text-gray-8' />
+                        <FrappeIcon name='at-sign' size={34} className='mb-3 text-gray-8' />
                         <Text weight='bold'>You are all caught up</Text>
                         <Text size='2' color='gray'>New mentions will appear here.</Text>
                     </Flex>
