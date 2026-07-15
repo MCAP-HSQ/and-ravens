@@ -40,10 +40,11 @@ const COOL_PLACEHOLDERS = [
 ]
 // const randomPlaceholder = COOL_PLACEHOLDERS[Math.floor(Math.random() * (COOL_PLACEHOLDERS.length))]
 interface ChatBoxBodyProps {
-    channelData: ChannelListItem | DMChannelListItem
+    channelData: ChannelListItem | DMChannelListItem,
+    headerHasTabs?: boolean
 }
 
-export const ChatBoxBody = ({ channelData }: ChatBoxBodyProps) => {
+export const ChatBoxBody = ({ channelData, headerHasTabs = false }: ChatBoxBodyProps) => {
 
     const { name: user } = useUserData()
     const { channelMembers, isLoading } = useFetchChannelMembers(channelData.name)
@@ -223,7 +224,7 @@ export const ChatBoxBody = ({ channelData }: ChatBoxBodyProps) => {
     const isSiteInReadOnlyMode = useIsSiteInReadOnlyMode()
 
     return (
-        <ChatBoxBodyContainer>
+        <ChatBoxBodyContainer headerHasTabs={headerHasTabs}>
             <FileDrop
                 files={files}
                 ref={fileInputRef}
@@ -305,11 +306,11 @@ const CompressImageCheckbox = ({ compressImages, setCompressImages }: { compress
 
 // Separate container to prevent re-rendering when the threadID changes
 
-const ChatBoxBodyContainer = ({ children }: { children: React.ReactNode }) => {
+const ChatBoxBodyContainer = ({ children, headerHasTabs = false }: { children: React.ReactNode, headerHasTabs?: boolean }) => {
 
     const { threadID } = useParams()
 
-    return <div className={clsx("flex flex-col overflow-hidden px-2 pt-16 justify-end h-full", threadID ? "sm:pl-4" : "sm:px-4")}>
+    return <div className={clsx("flex flex-col overflow-hidden px-2 justify-end h-full", headerHasTabs ? "pt-28" : "pt-16", threadID ? "sm:pl-4" : "sm:px-4")}>
         {children}
     </div>
 }

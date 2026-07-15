@@ -14,6 +14,7 @@ import WorkspaceSwitcher from './pages/WorkspaceSwitcher'
 import WorkspaceSwitcherGrid from './components/layout/WorkspaceSwitcherGrid'
 import { init } from 'emoji-mart'
 import AppUpdateProvider from './utils/AppUpdateProvider'
+import useFetchWorkspaces from './hooks/fetchers/useFetchWorkspaces'
 
 /** Following keys will not be cached in app cache */
 // const NO_CACHE_KEYS = [
@@ -70,7 +71,7 @@ const router = createBrowserRouter(
       <Route path='/forgot-password' lazy={() => import('@/pages/auth/ForgotPassword')} />
       <Route path="/" element={<ProtectedRoute />} errorElement={<ErrorPage />}>
         <Route path="/" element={<WorkspaceSwitcher />}>
-          <Route index element={lastWorkspace && lastChannel && isDesktop ? <Navigate to={`/${lastWorkspace}/${lastChannel}`} replace /> : lastWorkspace ? <Navigate to={`/${lastWorkspace}`} replace /> : <WorkspaceSwitcherGrid />} />
+          <Route index element={<InitialWorkspaceRoute />} />
           <Route path="workspace-explorer" element={<WorkspaceSwitcherGrid />} />
           <Route path="settings" lazy={() => import('./pages/settings/Settings')}>
             <Route index lazy={() => import('./components/feature/userSettings/UserProfile/UserProfile')} />
@@ -173,6 +174,31 @@ const router = createBrowserRouter(
   basename: import.meta.env.VITE_BASE_NAME ? `/${import.meta.env.VITE_BASE_NAME}` : '',
 }
 )
+
+/**
+ * A fresh single-workspace install should open the product, not stop at a
+ * workspace picker with the app rail hidden. The explorer remains available
+ * explicitly at /workspace-explorer for multi-workspace management.
+ */
+function InitialWorkspaceRoute() {
+  const { data } = useFetchWorkspaces()
+  const memberWorkspaces = data?.message.filter((workspace) => workspace.workspace_member_name) ?? []
+  const rememberedWorkspace = memberWorkspaces.find((workspace) => workspace.name === lastWorkspace)
+
+  if (rememberedWorkspace) {
+    if (lastChannel && isDesktop) {
+      return <Navigate to={`/${rememberedWorkspace.name}/${lastChannel}`} replace />
+    }
+    return <Navigate to={`/${rememberedWorkspace.name}`} replace />
+  }
+
+  if (memberWorkspaces.length === 1) {
+    return <Navigate to={`/${memberWorkspaces[0].name}`} replace />
+  }
+
+  return <WorkspaceSwitcherGrid />
+}
+
 function App() {
 
   const [appearance, setAppearance] = useStickyState<'light' | 'dark' | 'inherit'>('dark', 'appearance');

@@ -32,7 +32,7 @@ export type FileInChannel = {
     file_thumbnail?: string
 }
 
-const ViewFilesContent = () => {
+const ViewFilesContent = ({ embedded = false }: { embedded?: boolean }) => {
 
     const [searchText, setSearchText] = useState("")
     const debouncedText = useDebounce(searchText, 200)
@@ -64,7 +64,7 @@ const ViewFilesContent = () => {
 
     return (
         <div>
-            <Flex justify='between' gap='2'>
+            {!embedded && <Flex justify='between' gap='2'>
                 <Dialog.Title>Files shared in this channel</Dialog.Title>
                 {isDesktop &&
                     <Dialog.Close>
@@ -73,8 +73,8 @@ const ViewFilesContent = () => {
                         </IconButton>
                     </Dialog.Close>
                 }
-            </Flex>
-            <Flex direction='column' gap='4' className='pt-0 sm:pt-4 h-[80vh] sm:max-h-[75vh] sm:min-h-[75vh]'>
+            </Flex>}
+            <Flex direction='column' gap='4' className={embedded ? 'min-h-[60vh]' : 'pt-0 sm:pt-4 h-[80vh] sm:max-h-[75vh] sm:min-h-[75vh]'}>
                 <Flex justify='between' gap='2' className="flex-col sm:flex-row">
                     <Flex gap='2' className="flex-col sm:flex-row sm:items-center">
                         <TextField.Root className="w-full sm:w-[400px]" onChange={handleChange}
