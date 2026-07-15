@@ -3,14 +3,13 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react"
 import proxyOptions from "./proxyOptions";
 import svgr from "vite-plugin-svgr";
-import { VitePWA } from "vite-plugin-pwa"
 
 /// <reference types="vite-plugin-svgr/client" />
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(async ({ command, mode }) => {
 	const env = loadEnv(mode, process.cwd(), "")
 	return {
-		plugins: [react(), svgr(), VitePWA({
+		plugins: [react(), svgr(), ...(command === "build" ? [(await import("vite-plugin-pwa")).VitePWA({
 			registerType: "autoUpdate",
 			strategies: "injectManifest",
 			injectRegister: null,
@@ -55,7 +54,7 @@ export default defineConfig(({ command, mode }) => {
 					}
 				],
 			}
-		})],
+		})] : [])],
 		server: {
 			port: 8080,
 			proxy: proxyOptions
