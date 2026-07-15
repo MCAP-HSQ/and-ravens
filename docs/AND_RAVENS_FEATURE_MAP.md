@@ -11,7 +11,7 @@ This document maps the external Teams feature inventory to the Raven fork. “Im
 | App-bar navigation | Persistent Activity, Chat, Calendar, Calls, Files, AI, Apps and Settings rail | React Router + Raven workspace context |
 | Activity | Unread message/thread totals and a deep-linked mention feed | Raven unread and mentions APIs |
 | Chat / Posts | Existing Raven channels, DMs, threads, rich messages, mentions and reactions | Raven messaging DocTypes/APIs |
-| Tabbable modules | Registry-driven tab host supplies URL state, accessibility, keyboard behavior and lazy panel mounting; Posts and Shared are the first channel registrations | `TabbableModule` + Raven messages/files |
+| Tabbable modules | Teams-style `+` picker creates modules from a catalogue; the host supplies URL state, per-channel browser persistence, removal, accessibility, keyboard behavior and lazy panel mounting | `TabbableModule` + channel module registry |
 | Calendar | Month view of accessible Frappe Events, including meeting links | Frappe `Event` |
 | Calls / Meet now | Start a Google Meet for a Raven channel; list and rejoin recent linked meetings | Existing Raven event API + Google Calendar integration |
 | Files / Shared | Search and filter images and documents shared in accessible conversations | Raven message/file search API |
@@ -33,7 +33,7 @@ This document maps the external Teams feature inventory to the Raven fork. “Im
 | PSTN/audio/video calling and voicemail | Select a WebRTC/PSTN provider, add call-session/history models, permissions and realtime state. The current Calls screen intentionally exposes Raven’s existing Google Meet flow only. |
 | OneDrive/SharePoint | Add Microsoft Entra OAuth, Graph scopes, drive-item browsing/upload, token storage and tenant policy handling. Current Files searches Raven-managed shares. |
 | Exchange calendar sync | Add Microsoft Graph calendar adapter. Current Calendar uses Frappe Events and Google Meet links. |
-| Persisted user-added modules (Page, Notes, Planner, Power BI, custom apps) | The reusable tab host and channel registry are implemented. Persisting end-user module choices still requires a `Raven Channel Tab` model, app manifest/permission model and safe embed policy. |
+| Shared user-added modules (Page, Notes, Planner, Power BI, custom apps) | Picker-created tabs currently persist per channel in the browser. Sharing the same configuration with all channel members still requires a `Raven Channel Tab` model, app manifest/permission model and safe embed policy. |
 | Install/remove/upload app marketplace | Add an administrator-controlled app registry, manifest validation, install scopes and lifecycle hooks. The current Apps surface is a launcher for connected tools. |
 | Teams Activity parity (reactions, joins, app changes, meetings) | Add a normalized activity-event log and per-user read state; Raven currently provides deep-linked mentions and unread counts. |
 | Teams/Graph/Power Automate external interfaces | Implement only after tenant, licensing, consent and data-residency requirements are confirmed. |

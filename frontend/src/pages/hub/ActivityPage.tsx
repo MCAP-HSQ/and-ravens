@@ -1,5 +1,5 @@
 import { Box, Flex, Grid, Text } from '@radix-ui/themes'
-import { useFrappeGetCall } from 'frappe-react-sdk'
+import { useFrappePostCall } from 'frappe-react-sdk'
 import parse from 'html-react-parser'
 import { Link, useParams } from 'react-router-dom'
 import { LuActivity, LuAtSign, LuMessageSquareText } from 'react-icons/lu'
@@ -13,6 +13,7 @@ import useUnreadThreadsCount from '@/hooks/useUnreadThreadsCount'
 import { getTimePassed } from '@/utils/dateConversions'
 import { RavenChannel } from '@/types/RavenChannelManagement/RavenChannel'
 import { ChannelIcon } from '@/utils/layout/channelIcon'
+import { useEffect } from 'react'
 
 type Mention = {
     name: string
@@ -29,12 +30,11 @@ type Mention = {
 
 const ActivityPage = () => {
     const { workspaceID } = useParams()
-    const { data, error, isLoading } = useFrappeGetCall<{ message: Mention[] }>(
-        'raven.api.mentions.get_mentions',
-        { limit: 50, start: 0 },
-        undefined,
-        { revalidateOnFocus: true },
-    )
+    const { call, result: data, error, loading: isLoading } = useFrappePostCall<{ message: Mention[] }>('raven.api.mentions.get_mentions')
+
+    useEffect(() => {
+        void call({ limit: 50, start: 0 })
+    }, [])
     const { unread_count } = useUnreadMessageCount()
     const { data: unreadThreads } = useUnreadThreadsCount()
 
