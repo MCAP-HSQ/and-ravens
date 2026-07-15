@@ -11,7 +11,7 @@ This document maps the external Teams feature inventory to the Raven fork. “Im
 | App-bar navigation | Persistent Activity, Chat, Calendar, Calls, Files, AI, Apps and Settings rail | React Router + Raven workspace context |
 | Activity | Unread message/thread totals and a deep-linked mention feed | Raven unread and mentions APIs |
 | Chat / Posts | Existing Raven channels, DMs, threads, rich messages, mentions and reactions | Raven messaging DocTypes/APIs |
-| Tabbable modules | Teams-style `+` picker creates modules from a catalogue; the host supplies URL state, per-channel browser persistence, removal, accessibility, keyboard behavior and lazy panel mounting | `TabbableModule` + channel module registry |
+| Tabbable modules | Teams-style `+` opens an Add a tab dialog with picker, details, configuration, saving/error, optional channel post and completion states; the host also supplies URL state, per-channel browser persistence, removal confirmation, accessibility and lazy panels | `TabbableModule` + channel module registry |
 | Calendar | Month view of accessible Frappe Events, including meeting links | Frappe `Event` |
 | Calls / Meet now | Start a Google Meet for a Raven channel; list and rejoin recent linked meetings | Existing Raven event API + Google Calendar integration |
 | Files / Shared | Search and filter images and documents shared in accessible conversations | Raven message/file search API |

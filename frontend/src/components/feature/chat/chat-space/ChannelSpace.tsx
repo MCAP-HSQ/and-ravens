@@ -2,10 +2,11 @@ import { Box } from '@radix-ui/themes'
 import { ChannelListItem } from '@/utils/channel/ChannelListProvider'
 import { ChannelHeader } from '../../chat-header/ChannelHeader'
 import { useParams } from 'react-router-dom'
-import TabbableModule from '@/components/layout/TabbableModule/TabbableModule'
+import TabbableModule, { TabbableModuleTab, TabbableModuleTabConfig } from '@/components/layout/TabbableModule/TabbableModule'
 import { getChannelTabRegistry } from '@/modules/channelTabRegistry'
 import clsx from 'clsx'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
+import { useFrappePostCall } from 'frappe-react-sdk'
 
 interface ChannelSpaceProps {
     channelData: ChannelListItem
@@ -14,6 +15,17 @@ interface ChannelSpaceProps {
 export const ChannelSpace = ({ channelData }: ChannelSpaceProps) => {
     const { threadID } = useParams()
     const tabs = useMemo(() => getChannelTabRegistry(channelData), [channelData])
+    const { call: postMessage } = useFrappePostCall('raven.api.raven_message.send_message')
+
+    const onAddTab = useCallback(async (_tab: TabbableModuleTab, config: TabbableModuleTabConfig) => {
+        if (!config.postToChannel) return
+        const safeLabel = config.label.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+        await postMessage({
+            channel_id: channelData.name,
+            text: `<p><strong>${safeLabel}</strong> was added as a channel tab.</p>`,
+            send_silently: false,
+        })
+    }, [channelData.name, postMessage])
 
     return (
         <Box>
@@ -22,6 +34,7 @@ export const ChannelSpace = ({ channelData }: ChannelSpaceProps) => {
                 tabs={tabs}
                 defaultTab='posts'
                 storageKey={`and-ravens:channel-tabs:${channelData.name}`}
+                onAddTab={onAddTab}
                 ariaLabel={`${channelData.channel_name} modules`}
                 tabListClassName={clsx(
                     'fixed top-[53px] z-[998] h-11',
