@@ -1,12 +1,12 @@
 from . import __version__ as app_version
 
 app_name = "raven"
-app_title = "Raven"
-app_publisher = "The Commit Company (Algocode Technologies Pvt. Ltd.)"
-app_description = "Messaging Application"
+app_title = "And Ravens"
+app_publisher = "MCAP-HSQ (based on Raven by The Commit Company)"
+app_description = "ERP collaboration hub with messaging, activity, meetings, files and AI"
 app_email = "support@thecommit.company"
 app_license = "AGPLv3"
-source_link = "https://github.com/The-Commit-Company/Raven"
+source_link = "https://github.com/MCAP-HSQ/and-ravens"
 app_logo = "/assets/raven/raven-logo.png"
 app_logo_url = "/assets/raven/raven-logo.png"
 
@@ -23,7 +23,7 @@ add_to_apps_screen = [
 	{
 		"name": "raven",
 		"logo": "/assets/raven/raven-logo.png",
-		"title": "Raven",
+		"title": "And Ravens",
 		"route": "/raven",
 		"has_permission": "raven.permissions.check_app_permission",
 	}

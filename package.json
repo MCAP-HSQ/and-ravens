@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "raven",
+  "name": "and-ravens",
   "version": "2.8.11",
-  "description": "Messaging Application",
+  "description": "ERP collaboration hub built on Raven",
   "workspaces": [
     "frontend",
     "apps/*",

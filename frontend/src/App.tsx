@@ -150,6 +150,12 @@ const router = createBrowserRouter(
           </Route>
           <Route path=":workspaceID" element={<MainPage />}>
             <Route index element={<MobileTabsPage />} />
+            <Route path="activity" lazy={() => import('./pages/hub/ActivityPage')} />
+            <Route path="calendar" lazy={() => import('./pages/hub/CalendarPage')} />
+            <Route path="calls" lazy={() => import('./pages/hub/CallsPage')} />
+            <Route path="files" lazy={() => import('./pages/hub/FilesPage')} />
+            <Route path="ai" lazy={() => import('./pages/hub/AIPage')} />
+            <Route path="apps" lazy={() => import('./pages/hub/AppsPage')} />
             <Route path="threads" lazy={() => import('./components/feature/threads/Threads')}>
               <Route path=":threadID" lazy={() => import('./components/feature/threads/ThreadManager/ViewThread')} />
             </Route>

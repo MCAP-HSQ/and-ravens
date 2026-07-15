@@ -3,7 +3,7 @@ name = "raven"
 authors = [
     { name = "The Commit Company", email = "support@thecommit.company"}
 ]
-description = "Simple, open source messaging tool"
+description = "And Ravens collaboration hub, built on the Raven messaging platform"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]
@@ -42,6 +42,6 @@ out_dir = "../raven/public/raven"
 index_html_path = "../raven/www/raven.html"
 
 [project.urls]
-Homepage = "https://www.ravenchat.ai/"
-Repository = "https://github.com/The-Commit-Company/raven.git"
-"Bug Reports" = "https://github.com/The-Commit-Company/raven/issues"
+Homepage = "https://github.com/MCAP-HSQ/and-ravens"
+Repository = "https://github.com/MCAP-HSQ/and-ravens.git"
+"Bug Reports" = "https://github.com/MCAP-HSQ/and-ravens/issues"

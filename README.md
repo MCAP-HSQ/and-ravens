@@ -1,3 +1,10 @@
+<h1 align="center">And Ravens</h1>
+<p align="center"><strong>A Teams-inspired collaboration hub for Frappe, built as an AGPL fork of Raven.</strong></p>
+
+> **Compatibility note:** the internal Frappe app/module name remains `raven` so existing Raven sites, DocTypes, migrations and integrations continue to work. The product and repository are branded **And Ravens**.
+>
+> Upstream: [The-Commit-Company/Raven](https://github.com/The-Commit-Company/Raven). This fork preserves the original AGPL-3.0 license and attribution.
+
 <p align="center">
   <a href="https://github.com/The-Commit-Company/raven">
   <img src="raven_logo.png" alt="Raven logo" height="100" />

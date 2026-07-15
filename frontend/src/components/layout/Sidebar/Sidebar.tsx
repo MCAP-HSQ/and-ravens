@@ -3,10 +3,12 @@ import { SidebarBody } from "./SidebarBody";
 import { Box, Flex, Separator } from "@radix-ui/themes";
 import { HStack } from "../Stack";
 import WorkspacesSidebar from "./WorkspacesSidebar";
+import AppRail from "../AppRail/AppRail";
 
 export const Sidebar = () => {
     return (
         <HStack gap='0' className="h-screen">
+            <AppRail />
             <WorkspacesSidebar />
             <Flex justify='between' direction='row' gap='2' width='100%'>
                 <Flex direction='column' gap='2' width='100%'>

@@ -16,11 +16,11 @@ export default defineConfig(({ command, mode }) => {
 			injectRegister: null,
 			outDir: "../raven/public/raven",
 			manifest: {
-				name: "Raven",
+				name: "And Ravens",
 				start_url: `/${env.VITE_BASE_NAME}`,
 				scope: `/${env.VITE_BASE_NAME}/`,
-				short_name: "Raven",
-				description: "Simple, work messaging tool.",
+				short_name: "And Ravens",
+				description: "ERP collaboration hub with messaging, meetings, files and AI.",
 				display: "standalone",
 				"icons": [
 					{

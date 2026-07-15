@@ -39,7 +39,26 @@ ul {
 }
 
 :root {
-    --sidebar-width: 20rem;
+    --sidebar-width: 24.5rem;
+}
+
+.and-ravens-app-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 3px;
+    height: 0;
+    border-radius: 0 999px 999px 0;
+    background: var(--accent-9);
+    transition: height 160ms ease;
+}
+
+.and-ravens-app-link:hover::before {
+    height: 1rem;
+}
+
+.and-ravens-app-link.is-active::before {
+    height: 2rem;
 }
 
 @media (max-width: 768px) {
