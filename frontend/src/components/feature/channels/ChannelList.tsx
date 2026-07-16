@@ -7,7 +7,6 @@ import { ContextMenu, DropdownMenu, Flex, IconButton, Text } from "@radix-ui/the
 import { useParams, useSearchParams } from "react-router-dom"
 import { useStickyState } from "@/hooks/useStickyState"
 import useCurrentRavenUser from "@/hooks/useCurrentRavenUser"
-import { RiPushpinLine, RiUnpinLine } from "react-icons/ri"
 import { FrappeConfig, FrappeContext } from "frappe-react-sdk"
 import { RavenUser } from "@/types/Raven/RavenUser"
 import { __ } from "@/utils/translations"
@@ -15,7 +14,7 @@ import { ChannelWithUnreadCount } from "@/components/layout/Sidebar/useGetChanne
 import { useAtom } from "jotai"
 import { showOnlyMyChannelsAtom } from "@/components/layout/Sidebar/SidebarBody"
 import clsx from "clsx"
-import { BiDotsVerticalRounded } from "react-icons/bi"
+import FrappeIcon from '@/components/icons/FrappeIcon'
 
 interface ChannelListProps {
     channels: ChannelWithUnreadCount[]
@@ -45,8 +44,8 @@ export const ChannelList = ({ channels }: ChannelListProps) => {
 
     return (
         <SidebarGroup>
-            <SidebarGroupItem className={'gap-1 pl-1'}>
-                <Flex width='100%' justify='between' align='center' gap='2' pr='2' className="group">
+            <SidebarGroupItem className='gap-1 px-2'>
+                <Flex width='100%' justify='between' align='center' gap='2' className='group'>
                     <Flex align='center' gap='2' width='100%' onClick={toggle} className="cursor-default select-none">
                         <SidebarGroupLabel>{__("Channels")}</SidebarGroupLabel>
                     </Flex>
@@ -94,15 +93,10 @@ export const ChannelItemElement = ({ channel }: { channel: ChannelWithUnreadCoun
     return (
         <ContextMenu.Root>
             <ContextMenu.Trigger>
-                <SidebarItem to={channel.name} className={`py-1.5 px-2.5
-                data-[state=open]:bg-gray-3
-                `}>
-                    <ChannelIcon type={channel.type} size='18' />
+                <SidebarItem to={channel.name} className='data-[state=open]:bg-gray-3'>
+                    <ChannelIcon type={channel.type} size={15} />
                     <Flex justify='between' align={'center'} width='100%'>
-                        <Text size={{
-                            initial: '3',
-                            md: '2'
-                        }} className="text-ellipsis line-clamp-1" as='span' weight={showUnread ? 'bold' : 'medium'}>{channel.channel_name}</Text>
+                        <Text size='2' className='line-clamp-1 text-ellipsis' as='span' weight={showUnread ? 'bold' : 'regular'}>{channel.channel_name}</Text>
                         {showUnread ? <SidebarBadge>{channel.unread_count}</SidebarBadge> : null}
                     </Flex>
                 </SidebarItem>
@@ -150,7 +144,7 @@ const PinButton = ({ channelID }: { channelID: string }) => {
             onClick={onClick}
             className='flex justify-start gap-2 min-w-24'
         >
-            <RiUnpinLine size='18' />
+            <FrappeIcon name='pin' />
             {__("Remove Pin")}
         </ContextMenu.Item>
     }
@@ -158,7 +152,7 @@ const PinButton = ({ channelID }: { channelID: string }) => {
         onClick={onClick}
         className='flex justify-start gap-2 min-w-24'
     >
-        <RiPushpinLine size='18' />
+        <FrappeIcon name='pin' />
         {__("Pin")}
     </ContextMenu.Item>
 
@@ -182,12 +176,12 @@ const ChannelListActions = () => {
                 <IconButton
                     aria-label={__("Options")}
                     title={__("Options")}
-                    variant="soft"
+                    variant='ghost'
                     size="1"
-                    radius="large"
-                    className={clsx('transition-all ease-ease text-gray-10 bg-transparent hover:bg-gray-3 hover:text-gray-12'
+                    radius='medium'
+                    className={clsx('bg-transparent text-gray-9 transition-colors hover:bg-gray-3 hover:text-gray-12'
                     )}>
-                    <BiDotsVerticalRounded />
+                    <FrappeIcon name='ellipsis-vertical' size={14} />
                 </IconButton>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content>

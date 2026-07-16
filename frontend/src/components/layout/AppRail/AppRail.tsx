@@ -60,16 +60,16 @@ const AppRail = () => {
             direction='column'
             align='center'
             justify='between'
-            className='and-ravens-app-rail h-screen w-[4.5rem] shrink-0 border-r border-gray-4 bg-gray-1 py-2 dark:border-gray-6 dark:bg-gray-1'
+            className='and-ravens-app-rail h-screen w-16 shrink-0 border-r border-gray-4 bg-gray-1 py-2 dark:border-gray-6 dark:bg-gray-1'
         >
             <Flex direction='column' align='center' gap='2' width='100%'>
-                <NavLink to={chatPath} aria-label={__('Open And Ravens chat')} className='mb-1'>
+                <NavLink to={chatPath} aria-label={__('Open And Ravens chat')} className='mb-1 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-accent-8'>
                     <Flex
                         align='center'
                         justify='center'
-                        className='h-10 w-10 rounded-xl bg-gray-12 text-white shadow-sm dark:bg-gray-12 dark:text-gray-1'
+                        className='h-9 w-9 rounded-lg bg-gray-12 text-white dark:bg-gray-12 dark:text-gray-1'
                     >
-                        <Text size='2' weight='bold' className='cal-sans tracking-tight'>A/R</Text>
+                        <Text size='1' weight='bold' className='tracking-tight'>A/R</Text>
                     </Flex>
                 </NavLink>
                 <Box className='h-px w-8 bg-gray-4 dark:bg-gray-6' />
@@ -94,7 +94,7 @@ const AppRailLink = ({ item }: { item: AppRailItem }) => (
             end={item.end}
             aria-label={__(item.label)}
             className={({ isActive }) => clsx(
-                'and-ravens-app-link group relative flex h-[3.35rem] w-full flex-col items-center justify-center gap-0.5 rounded-md text-gray-10 outline-none transition-colors hover:bg-gray-3 hover:text-gray-12 focus-visible:ring-2 focus-visible:ring-accent-8 dark:hover:bg-gray-4',
+                'and-ravens-app-link group relative flex h-12 w-full flex-col items-center justify-center gap-0.5 rounded-md text-gray-10 outline-none transition-colors hover:bg-gray-3 hover:text-gray-12 focus-visible:ring-2 focus-visible:ring-accent-8 dark:hover:bg-gray-4',
                 (item.active ?? isActive) && 'is-active bg-accent-3 text-accent-11 hover:bg-accent-4 hover:text-accent-12',
             )}
         >

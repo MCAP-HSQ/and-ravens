@@ -4,10 +4,10 @@ import { useIsDesktop } from '@/hooks/useMediaQuery'
 import { DIALOG_CONTENT_CLASS } from '@/utils/layout/dialog'
 import { hasRavenAdminRole } from '@/utils/roles'
 import { Dialog, IconButton, Tooltip } from '@radix-ui/themes'
-import { FiPlus } from 'react-icons/fi'
 import AddWorkspaceForm from './AddWorkspaceForm'
 import { useBoolean } from '@/hooks/useBoolean'
 import { useNavigate } from 'react-router-dom'
+import FrappeIcon from '@/components/icons/FrappeIcon'
 
 type Props = {}
 
@@ -44,9 +44,10 @@ const AddWorkspaceModal = () => {
                 <Dialog.Trigger>
                     <IconButton
                         color='gray'
-                        size='3'
-                        variant='soft'>
-                        <FiPlus size='20' />
+                        size='2'
+                        variant='ghost'
+                        className='border border-dashed border-gray-6 text-gray-10 hover:bg-gray-3 hover:text-gray-12'>
+                        <FrappeIcon name='plus' />
                     </IconButton>
                 </Dialog.Trigger>
             </Tooltip>
@@ -64,9 +65,9 @@ const AddWorkspaceModal = () => {
         <DrawerTrigger asChild>
             <IconButton
                 color='gray'
-                size='3'
-                variant='soft'>
-                <FiPlus size='20' />
+                size='2'
+                variant='ghost'>
+                <FrappeIcon name='plus' />
             </IconButton>
         </DrawerTrigger>
         <DrawerContent>

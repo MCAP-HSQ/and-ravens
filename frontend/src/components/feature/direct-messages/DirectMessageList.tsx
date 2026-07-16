@@ -37,8 +37,8 @@ export const DirectMessageList = ({ dm_channels }: DirectMessageListProps) => {
 
     return (
         <SidebarGroup pb='4'>
-            <SidebarGroupItem className={'gap-1 pl-1'}>
-                <Flex width='100%' justify='between' align='center' gap='2' pr='2' className="group">
+            <SidebarGroupItem className='gap-1 px-2'>
+                <Flex width='100%' justify='between' align='center' gap='2' className='group'>
                     <Flex align='center' gap='2' width='100%' onClick={toggle} className="cursor-default select-none">
                         <SidebarGroupLabel className="pt-0.5">{__("Members")}</SidebarGroupLabel>
                     </Flex>
@@ -90,7 +90,7 @@ export const DirectMessageItemElement = ({ channel }: { channel: DMChannelWithUn
         return null
     }
 
-    return <SidebarItem to={channel.name} className={'py-0.5 px-2'}>
+    return <SidebarItem to={channel.name}>
         <SidebarIcon>
             <UserAvatar src={userData?.user_image}
                 alt={userData?.full_name}
@@ -104,10 +104,7 @@ export const DirectMessageItemElement = ({ channel }: { channel: DMChannelWithUn
             />
         </SidebarIcon>
         <Flex justify='between' width='100%'>
-            <Text size={{
-                initial: '3',
-                md: '2'
-            }} className="text-ellipsis line-clamp-1" weight={showUnread ? 'bold' : 'medium'}>
+            <Text size='2' className='line-clamp-1 text-ellipsis' weight={showUnread ? 'bold' : 'regular'}>
                 {channel.peer_user_id !== currentUser ? userData?.full_name ?? channel.peer_user_id ?? replaceCurrentUserFromDMChannelName(channel.channel_name, currentUser) : `${userData?.full_name} (You)`}
             </Text>
             {showUnread ? <SidebarBadge>{channel.unread_count}</SidebarBadge> : null}
@@ -173,10 +170,7 @@ const ExtraUsersItem = ({ user, createDMChannel }: { user: UserFields, createDMC
                 availabilityStatus={user.availability_status} />
         </SidebarIcon>
         <Flex justify='between' width='100%'>
-            <Text size={{
-                initial: '3',
-                md: '2'
-            }} className="text-ellipsis line-clamp-1" weight='medium'>
+            <Text size='2' className='line-clamp-1 text-ellipsis' weight='regular'>
                 {user.name !== currentUser ? user.full_name : `${user.full_name} (You)`}
             </Text>
         </Flex>

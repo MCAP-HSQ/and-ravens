@@ -6,7 +6,6 @@ import { UserAvatar } from "@/components/common/UserAvatar"
 import { useContext, useMemo } from "react"
 import useFetchChannelMembers from "@/hooks/fetchers/useFetchChannelMembers"
 import ChannelHeaderMenu from "./ChannelHeaderMenu"
-import { BiChevronLeft } from "react-icons/bi"
 import { Link } from "react-router-dom"
 import { useGetUser } from "@/hooks/useGetUser"
 import useIsUserOnLeave from "@/hooks/fetchers/useIsUserOnLeave"
@@ -15,6 +14,7 @@ import { replaceCurrentUserFromDMChannelName } from "@/utils/operations"
 import { useIsDesktop } from "@/hooks/useMediaQuery"
 import { useAtomValue } from "jotai"
 import { lastWorkspaceAtom } from "@/utils/lastVisitedAtoms"
+import FrappeIcon from '@/components/icons/FrappeIcon'
 
 interface DMChannelHeaderProps {
     channelData: DMChannelListItem,
@@ -60,7 +60,7 @@ export const DMChannelHeader = ({ channelData }: DMChannelHeaderProps) => {
         <PageHeader>
             <Flex gap='3' align='center'>
                 <Link to={`/${lastWorkspace}`} className="block bg-transparent hover:bg-transparent active:bg-transparent sm:hidden">
-                    <BiChevronLeft size='24' className="block text-gray-12" />
+                    <FrappeIcon name='chevron-left' size={20} className='block text-gray-11' />
                 </Link>
                 <UserAvatar
                     key={peer}
@@ -73,8 +73,8 @@ export const DMChannelHeader = ({ channelData }: DMChannelHeaderProps) => {
                     size={isDesktop ? '2' : '1'} />
                 <Heading size={{
                     initial: '4',
-                    sm: '5'
-                }}>
+                    sm: '4'
+                }} weight='medium'>
                     <div className="flex items-center gap-2">
                         {userName}
                         {!user && <Badge color='gray' variant='soft'>Deleted</Badge>}

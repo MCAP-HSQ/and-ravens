@@ -3,8 +3,8 @@ import useIsPushNotificationEnabled from '@/hooks/fetchers/useIsPushNotification
 import { __ } from '@/utils/translations'
 import { DropdownMenu } from '@radix-ui/themes'
 import { useState } from 'react'
-import { BsBell, BsBellSlash } from 'react-icons/bs'
 import { toast } from 'sonner'
+import FrappeIcon from '@/components/icons/FrappeIcon'
 
 type Props = {}
 
@@ -68,7 +68,8 @@ const PushNotificationToggle = (props: Props) => {
         <DropdownMenu.Item color='gray'
             onClick={togglePushNotifications}
             className={'flex justify-normal gap-2'}>
-            {pushNotificationsEnabled ? <><BsBellSlash size='14' /> {__("Disable Notifications")}</> : <><BsBell size='14' /> {__("Enable Notifications")}</>}
+            <FrappeIcon name='bell' size={14} />
+            {pushNotificationsEnabled ? __("Disable Notifications") : __("Enable Notifications")}
         </DropdownMenu.Item>
     )
 }

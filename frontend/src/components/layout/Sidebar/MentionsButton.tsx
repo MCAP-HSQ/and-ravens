@@ -2,7 +2,6 @@ import { RavenMessage } from '@/types/RavenMessaging/RavenMessage'
 import { __ } from '@/utils/translations'
 import { Box, IconButton, Popover, Text, Flex } from '@radix-ui/themes'
 import { FrappeConfig, FrappeContext, useFrappeEventListener, useFrappeGetCall } from 'frappe-react-sdk'
-import { LuAtSign } from 'react-icons/lu'
 import parse from 'html-react-parser'
 import { getTimePassed } from '@/utils/dateConversions'
 import { HStack } from '../Stack'
@@ -10,7 +9,7 @@ import { RavenChannel } from '@/types/RavenChannelManagement/RavenChannel'
 import { ChannelIcon } from '@/utils/layout/channelIcon'
 import { useGetUser } from '@/hooks/useGetUser'
 import { UserAvatar } from '@/components/common/UserAvatar'
-import { BiMessageAltDetail } from 'react-icons/bi'
+import FrappeIcon from '@/components/icons/FrappeIcon'
 import { useMemo, useCallback, useEffect, useRef, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import BeatLoader from '@/components/layout/Loaders/BeatLoader'
@@ -42,10 +41,10 @@ const MentionsButton = () => {
                     title={__("View mentions")}
                     color='gray'
                     variant='ghost'
-                    className='relative text-gray-11 sm:hover:text-gray-12 sm:hover:bg-transparent p-2 sm:px-4 data-[state=open]:bg-transparent data-[state=open]:text-gray-12'
+                    className='relative text-gray-10 hover:bg-gray-3 hover:text-gray-12 data-[state=open]:bg-gray-3 data-[state=open]:text-gray-12'
                 >
-                    <LuAtSign className='text-lg sm:text-xl' />
-                    {mentionsCount && mentionsCount?.message > 0 && <Box className='rounded-full absolute -right-0.5 -bottom-0.5 sm:right-1.5 sm:bottom-0 bg-red-11 dark:bg-red-9 text-white w-4 h-4 flex items-center justify-center'>
+                    <FrappeIcon name='at-sign' />
+                    {mentionsCount && mentionsCount?.message > 0 && <Box className='absolute -bottom-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full border-2 border-gray-2 bg-red-10 px-0.5 text-white dark:border-gray-2'>
                         <Text as='span' size='1'>{mentionsCount?.message}</Text>
                     </Box>}
                 </IconButton>
@@ -216,7 +215,7 @@ const ChannelContext = ({ mention }: { mention: MentionObject }) => {
                         <Text size="1" as="span">
                             {mention.is_thread ? (
                                 <HStack gap="1" align="center" className="inline-flex">
-                                    in <BiMessageAltDetail size="14" className="mt-[0.5px]" /> thread
+                                    in <FrappeIcon name='message-square-text' size={14} /> thread
 
                                 </HStack>
                             ) : mention.is_direct_message ? (

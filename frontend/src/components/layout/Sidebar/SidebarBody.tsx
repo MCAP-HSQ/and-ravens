@@ -5,7 +5,6 @@ import { AccessibleIcon, Box, Flex, ScrollArea, Text } from '@radix-ui/themes'
 import { useFetchUnreadMessageCount } from '@/hooks/useUnreadMessageCount'
 import PinnedChannels from './PinnedChannels'
 import React, { useContext, useMemo } from 'react'
-import { BiBookmark, BiMessageAltDetail } from 'react-icons/bi'
 import { __ } from '@/utils/translations'
 import { UnreadList } from '@/components/feature/channel-groups/UnreadList'
 import { ChannelListContext, ChannelListContextType } from '@/utils/channel/ChannelListProvider'
@@ -13,6 +12,7 @@ import { useGetChannelUnreadCounts } from './useGetChannelUnreadCounts'
 import { useParams } from 'react-router-dom'
 import { atomWithStorage } from 'jotai/utils'
 import useUnreadThreadsCount from '@/hooks/useUnreadThreadsCount'
+import FrappeIcon from '@/components/icons/FrappeIcon'
 
 export const showOnlyMyChannelsAtom = atomWithStorage('showOnlyMyChannels', false)
 
@@ -34,19 +34,14 @@ export const SidebarBody = () => {
     })
 
     return (
-        <ScrollArea type="hover" scrollbars="vertical" className='h-[calc(100vh-4rem)]'>
-            <Flex direction='column' gap='2' className='overflow-x-hidden pb-12 sm:pb-0' px='2'>
-                <Flex direction='column' gap='1' className='pb-0.5'>
+        <ScrollArea type='hover' scrollbars='vertical' className='h-[calc(100vh-52px)]'>
+            <Flex direction='column' gap='3' className='overflow-x-hidden px-2 py-2 pb-12 sm:pb-3'>
+                <Flex direction='column' gap='0'>
                     <ThreadsButton />
-                    {/* <SidebarItemForPage
-                        to={'threads'}
-                        label='Threads'
-                        icon={<BiMessageAltDetail className='text-gray-12 dark:text-gray-300 mt-1 sm:text-sm text-base' />}
-                        iconLabel='Threads' /> */}
                     <SidebarItemForPage
                         to={'saved-messages'}
                         label='Saved'
-                        icon={<BiBookmark className='text-gray-12 dark:text-gray-300 mt-0.5 sm:text-sm text-base' />}
+                        icon={<FrappeIcon name='bookmark' />}
                         iconLabel='Saved Message' />
                 </Flex>
                 <PinnedChannels unread_count={unread_count?.message} />
@@ -74,7 +69,7 @@ const ThreadsButton = () => {
             to={'threads'}
             label='Threads'
             unreadCount={totalUnreadThreads}
-            icon={<BiMessageAltDetail className='text-gray-12 dark:text-gray-300 mt-1 sm:text-sm text-base' />}
+            icon={<FrappeIcon name='message-square-text' />}
             iconLabel='Threads' />
     )
 }
@@ -90,16 +85,13 @@ interface SidebarItemForPageProps {
 const SidebarItemForPage = ({ to, label, icon, iconLabel, unreadCount }: SidebarItemForPageProps) => {
     return (
         <Box>
-            <SidebarItem to={to} className='py-1 px-[10px] flex items-center justify-between'>
+            <SidebarItem to={to} className='flex items-center justify-between'>
                 <div className='flex items-center gap-2'>
                     <AccessibleIcon label={__(iconLabel)}>
                         {icon}
                     </AccessibleIcon>
                     <Box>
-                        <Text size={{
-                            initial: '3',
-                            md: '2'
-                        }} className='text-gray-12 dark:text-gray-300 font-semibold'>{__(label)}</Text>
+                        <Text size='2' weight='medium'>{__(label)}</Text>
                     </Box>
                 </div>
 

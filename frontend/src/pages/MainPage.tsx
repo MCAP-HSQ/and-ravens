@@ -102,7 +102,7 @@ const MainPageContent = () => {
         <ChannelListProvider>
             <Flex>
                 {!isMobile &&
-                    <Box className={`w-[24.5rem] bg-gray-2 border-r-gray-3 border-r dark:bg-gray-1`} left="0" top='0' position="fixed">
+                    <Box className='and-ravens-shell w-[var(--sidebar-width)] border-r border-gray-4 bg-gray-2 dark:border-gray-6 dark:bg-gray-2' left="0" top='0' position="fixed">
                         <Sidebar />
                     </Box>
                 }

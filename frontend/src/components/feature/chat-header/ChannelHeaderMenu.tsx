@@ -1,6 +1,5 @@
 import { useBoolean } from '@/hooks/useBoolean'
 import { DropdownMenu, Flex, IconButton } from '@radix-ui/themes'
-import { BiDotsVerticalRounded, BiFile, BiSearch, BiVideoPlus } from 'react-icons/bi'
 import { ViewFilesButton } from '../files/ViewFilesButton'
 import AddChannelMembersModal from '../channel-member-details/add-members/AddChannelMembersModal'
 import { useParams } from 'react-router-dom'
@@ -10,15 +9,12 @@ import { useContext, useMemo } from 'react'
 import useFetchChannelMembers from '@/hooks/fetchers/useFetchChannelMembers'
 import { UserContext } from '@/utils/auth/UserProvider'
 import ViewChannelDetailsModal from '../channels/ViewChannelDetailsModal'
-import { SlSettings } from 'react-icons/sl'
-import { TbUsersPlus } from 'react-icons/tb'
 import CreateMeetingDialog from '../integrations/meetings/CreateMeetingDialog'
+import FrappeIcon from '@/components/icons/FrappeIcon'
 
 type Props = {
     channelData: ChannelListItem,
 }
-
-const ICON_SIZE = '16'
 
 const ChannelHeaderMenu = ({ channelData }: Props) => {
 
@@ -45,26 +41,26 @@ const ChannelHeaderMenu = ({ channelData }: Props) => {
     return (
         <><DropdownMenu.Root>
             <DropdownMenu.Trigger>
-                <IconButton color='gray' className='bg-transparent text-gray-12 hover:bg-gray-3'>
-                    <BiDotsVerticalRounded />
+                <IconButton color='gray' variant='ghost' className='bg-transparent text-gray-10 hover:bg-gray-3 hover:text-gray-12'>
+                    <FrappeIcon name='ellipsis-vertical' />
                 </IconButton>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content className='min-w-48'>
                 <DropdownMenu.Item onClick={onMeetingModalOpen}>
                     <Flex gap='2' align='center'>
-                        <BiVideoPlus size={ICON_SIZE} />
+                        <FrappeIcon name='video' />
                         Start a Meeting
                     </Flex>
                 </DropdownMenu.Item>
                 <DropdownMenu.Item onClick={onGlobalSearchModalOpen}>
                     <Flex gap='2' align='center'>
-                        <BiSearch size={ICON_SIZE} />
+                        <FrappeIcon name='search' />
                         Search
                     </Flex>
                 </DropdownMenu.Item>
                 <DropdownMenu.Item onClick={onFileOpen}>
                     <Flex gap='2' align='center'>
-                        <BiFile size={ICON_SIZE} />
+                        <FrappeIcon name='file' />
                         View Files
                     </Flex>
                 </DropdownMenu.Item>
@@ -79,7 +75,7 @@ const ChannelHeaderMenu = ({ channelData }: Props) => {
                     {canAddMembers &&
                         <DropdownMenu.Item onClick={onAddMembersOpen}>
                             <Flex gap='2' align='center'>
-                                <TbUsersPlus size={ICON_SIZE} />
+                                <FrappeIcon name='user-plus' />
                                 Add Members
                             </Flex>
                         </DropdownMenu.Item>
@@ -87,7 +83,7 @@ const ChannelHeaderMenu = ({ channelData }: Props) => {
 
                     <DropdownMenu.Item onClick={onChannelDetailsOpen}>
                         <Flex gap='2' align='center'>
-                            <SlSettings size={ICON_SIZE} />
+                            <FrappeIcon name='settings' />
                             Channel Settings
                         </Flex>
                     </DropdownMenu.Item>

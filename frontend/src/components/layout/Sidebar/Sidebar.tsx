@@ -1,21 +1,18 @@
 import { SidebarHeader } from "./SidebarHeader";
 import { SidebarBody } from "./SidebarBody";
-import { Box, Flex, Separator } from "@radix-ui/themes";
+import { Flex } from "@radix-ui/themes";
 import { HStack } from "../Stack";
 import WorkspacesSidebar from "./WorkspacesSidebar";
 import AppRail from "../AppRail/AppRail";
 
 export const Sidebar = () => {
     return (
-        <HStack gap='0' className="h-screen">
+        <HStack gap='0' className='h-screen bg-gray-2 dark:bg-gray-2'>
             <AppRail />
             <WorkspacesSidebar />
-            <Flex justify='between' direction='row' gap='2' width='100%'>
-                <Flex direction='column' gap='2' width='100%'>
+            <Flex justify='between' direction='row' width='100%' className='min-w-0'>
+                <Flex direction='column' width='100%' className='min-w-0'>
                     <SidebarHeader />
-                    <Box px='2'>
-                        <Separator size='4' className={`bg-gray-4 dark:bg-gray-6`} />
-                    </Box>
                     <SidebarBody />
                 </Flex>
             </Flex>

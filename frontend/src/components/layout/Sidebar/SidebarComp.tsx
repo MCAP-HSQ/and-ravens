@@ -1,11 +1,11 @@
 import React, { forwardRef, ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Flex, FlexProps, IconButton, Text, TextProps, Theme } from '@radix-ui/themes';
+import { Flex, FlexProps, IconButton, Text, TextProps } from '@radix-ui/themes';
 import { IconButtonProps } from '@radix-ui/themes/dist/cjs/components/icon-button';
 import { BadgeProps } from '@radix-ui/themes/dist/cjs/components/badge';
 import { clsx } from 'clsx';
-import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { __ } from '@/utils/translations';
+import FrappeIcon from '@/components/icons/FrappeIcon';
 
 type SidebarGroupProps = FlexProps & {
     children: ReactNode;
@@ -14,7 +14,7 @@ type SidebarGroupProps = FlexProps & {
 export const SidebarGroup = ({ children, ...props }: SidebarGroupProps) => {
 
     return (
-        <Flex direction='column' gap="2" {...props}>
+        <Flex direction='column' gap='2' {...props}>
             {children}
         </Flex>
     )
@@ -38,10 +38,7 @@ type SidebarGroupLabelProps = TextProps & {
 
 export const SidebarGroupLabel = ({ children, ...props }: SidebarGroupLabelProps) => {
     return (
-        <Text size={{
-            initial: '3',
-            md: '2'
-        }} weight='bold' {...props} className={clsx('cal-sans text-gray-12 dark:text-gray-300', props.className)}>
+        <Text size='1' weight='medium' {...props} className={clsx('uppercase tracking-[0.055em] text-gray-10', props.className)}>
             {children}
         </Text>
     )
@@ -53,7 +50,7 @@ type SidebarGroupListProps = FlexProps & {
 export const SidebarGroupList = ({ children, ...props }: SidebarGroupListProps) => {
 
     return (
-        <Flex direction='column' {...props} className={clsx(`gap-0.5 transition-all ease-ease-out-cubic duration-200 overflow-hidden`, props.className)}>
+        <Flex direction='column' {...props} className={clsx('gap-0.5 overflow-hidden transition-all duration-150 ease-out', props.className)}>
             {children}
         </Flex>
     )
@@ -69,7 +66,7 @@ type SidebarItemProps = FlexProps & {
 
 export const SidebarItem = forwardRef<HTMLAnchorElement, SidebarItemProps>(({ to, children, end, active = false, activeStyles, className, ...props }, ref) => {
 
-    const activeClass = 'bg-gray-3 dark:bg-gray-3 text-gray-12'
+    const activeClass = 'bg-gray-4 text-gray-12'
 
     return (
         <NavLink
@@ -83,8 +80,7 @@ export const SidebarItem = forwardRef<HTMLAnchorElement, SidebarItemProps>(({ to
                     <Flex
                         gap='2'
                         align='center'
-                        px='2'
-                        className={clsx('cursor-pointer text-gray-12 user-select-none rounded-md no-underline sm:hover:bg-gray-3 active:bg-gray-3', isActive ? activeClass : '', className)}
+                        className={clsx('min-h-8 cursor-pointer select-none rounded-[6px] px-2 text-gray-11 no-underline transition-colors hover:bg-gray-3 hover:text-gray-12 active:bg-gray-4', (isActive || active) ? activeClass : '', className)}
                         {...props}>
                         {children}
                     </Flex>
@@ -100,7 +96,7 @@ type SidebarIconProps = FlexProps & {
 }
 export const SidebarIcon = ({ subtle, children, ...props }: SidebarIconProps) => {
     return (
-        <Flex align='center' justify='center' className='text-slate-11' {...props}>
+        <Flex align='center' justify='center' className='shrink-0 text-gray-10' {...props}>
             {children}
         </Flex>
     )
@@ -124,8 +120,7 @@ export const SidebarButtonItem = ({ children, subtle, onClick, isLoading, active
         <Flex
             gap='2'
             align='center'
-            px='2'
-            className={clsx('user-select-none rounded-md py-0.5 text-gray-12 hover:bg-gray-3 ', cursor, className)}
+            className={clsx('min-h-8 select-none rounded-[6px] px-2 text-gray-11 transition-colors hover:bg-gray-3 hover:text-gray-12', active && 'bg-gray-4 text-gray-12', cursor, className)}
             onClick={onClick}
             {...props}
         >
@@ -145,14 +140,14 @@ export const SidebarViewMoreButton = ({ expanded, onClick, ...props }: SidebarVi
         <IconButton
             aria-label={expanded ? __("Collapse") : __("Expand")}
             title={expanded ? __("Collapse") : __("Expand")}
-            variant='soft'
+            variant='ghost'
             size='1'
-            radius='large'
+            radius='medium'
             onClick={onClick}
             {...props}
-            className={clsx('cursor-pointer transition-all text-gray-10 bg-transparent sm:hover:bg-gray-3 ease-ease group-hover:text-gray-12', props.className)}
+            className={clsx('cursor-pointer bg-transparent text-gray-9 transition-colors hover:bg-gray-3 hover:text-gray-12 group-hover:text-gray-11', props.className)}
         >
-            {expanded ? <FiChevronDown size='16' /> : <FiChevronRight size='16' />}
+            <FrappeIcon name={expanded ? 'chevron-down' : 'chevron-right'} size={14} />
         </IconButton>
     )
 }
@@ -160,14 +155,8 @@ export const SidebarViewMoreButton = ({ expanded, onClick, ...props }: SidebarVi
 export const SidebarBadge = ({ children, className, ...props }: BadgeProps) => {
 
     return (
-        <Theme accentColor='gray'>
-            <div className={clsx(`flex items-center justify-center min-w-2 text-accent-a11 dark:text-accent-a11 dark:bg-accent-a3 bg-accent-a4 text-xs py-0.5 px-2 rounded-radius2
-            whitespace-nowrap font-medium
-            `, className)}>
-                {children}
-            </div>
-        </Theme>
-
-
+        <div className={clsx('flex h-[18px] min-w-[18px] items-center justify-center whitespace-nowrap rounded-full bg-gray-5 px-1.5 text-[11px] font-medium leading-none text-gray-11', className)}>
+            {children}
+        </div>
     )
 }

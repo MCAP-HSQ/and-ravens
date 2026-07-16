@@ -3,17 +3,15 @@ import { UserContext } from '../../../utils/auth/UserProvider'
 import { useUserData } from '@/hooks/useUserData'
 import { Box, DropdownMenu, IconButton, Separator, Tooltip } from '@radix-ui/themes'
 import { UserAvatar } from '@/components/common/UserAvatar'
-import { BsEmojiSmile } from 'react-icons/bs'
 import useCurrentRavenUser from '@/hooks/useCurrentRavenUser'
 import { useIsUserActive } from '@/hooks/useIsUserActive'
-import { MdOutlineExitToApp } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { SetUserAvailabilityMenu } from '@/components/feature/userSettings/AvailabilityStatus/SetUserAvailabilityMenu'
 import { SetCustomStatusModal } from '@/components/feature/userSettings/CustomStatus/SetCustomStatusModal'
 import PushNotificationToggle from '@/components/feature/userSettings/PushNotifications/PushNotificationToggle'
 import { __ } from '@/utils/translations'
 import { Stack } from '../Stack'
-import { LuNavigation, LuSettings } from 'react-icons/lu'
+import FrappeIcon from '@/components/icons/FrappeIcon'
 
 export const SidebarFooter = () => {
 
@@ -27,23 +25,23 @@ export const SidebarFooter = () => {
 
     const navigate = useNavigate()
 
-    return <Stack className='mx-auto py-0' align='center' gap='2'>
+    return <Stack className='mx-auto py-0' align='center' gap='1'>
         <Box>
             <Tooltip content="Workspace Explorer" side='right'>
-                <IconButton aria-label='Workspace Explorer' size='3' color='gray' variant='ghost' onClick={() => navigate('/workspace-explorer')}>
-                    <LuNavigation size='18' />
+                <IconButton aria-label='Workspace Explorer' size='2' color='gray' variant='ghost' className='text-gray-10 hover:bg-gray-3 hover:text-gray-12' onClick={() => navigate('/workspace-explorer')}>
+                    <FrappeIcon name='compass' />
                 </IconButton>
             </Tooltip>
         </Box>
         <Box>
             <Tooltip content="Settings" side='right'>
-                <IconButton aria-label='Settings' size='3' color='gray' variant='ghost' onClick={() => navigate('/settings/profile')}>
-                    <LuSettings size='18' />
+                <IconButton aria-label='Settings' size='2' color='gray' variant='ghost' className='text-gray-10 hover:bg-gray-3 hover:text-gray-12' onClick={() => navigate('/settings/profile')}>
+                    <FrappeIcon name='settings' />
                 </IconButton>
             </Tooltip>
         </Box>
-        <Separator size='4' className={`bg-gray-4 dark:bg-gray-6`} />
-        <Box className='pb-4 sm:pb-0 pt-2'>
+        <Separator size='4' className='bg-gray-4 dark:bg-gray-6' />
+        <Box className='pt-1 sm:pb-0'>
             <DropdownMenu.Root>
                 <Tooltip content="Options" side='right'>
                     <DropdownMenu.Trigger>
@@ -52,22 +50,22 @@ export const SidebarFooter = () => {
                                 src={myProfile?.user_image}
                                 alt={myProfile?.full_name}
                                 size='2'
-                                className='hover:shadow-sm transition-all duration-200'
+                                className='transition-colors hover:ring-2 hover:ring-gray-5'
                                 availabilityStatus={myProfile?.availability_status}
                                 isActive={isActive} />
 
                         </IconButton>
                     </DropdownMenu.Trigger>
                 </Tooltip>
-                <DropdownMenu.Content variant='soft'>
+                <DropdownMenu.Content variant='soft' align='start' side='right' sideOffset={8}>
                     <SetUserAvailabilityMenu />
                     <DropdownMenu.Item color='gray' className={'flex justify-normal gap-2'} onClick={() => setUserStatusModalOpen(true)}>
-                        <BsEmojiSmile size='14' /> {__("Set custom status")}
+                        <FrappeIcon name='smile' size={14} /> {__("Set custom status")}
                     </DropdownMenu.Item>
                     <PushNotificationToggle />
                     <DropdownMenu.Separator />
                     <DropdownMenu.Item color='red' className={'flex justify-normal gap-2'} onClick={logout}>
-                        <MdOutlineExitToApp size='14' /> {__("Log Out")}
+                        <FrappeIcon name='log-out' size={14} /> {__("Log Out")}
                     </DropdownMenu.Item>
                 </DropdownMenu.Content>
             </DropdownMenu.Root>

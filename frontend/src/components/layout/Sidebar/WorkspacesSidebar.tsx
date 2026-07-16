@@ -22,7 +22,6 @@ const WorkspacesSidebar = () => {
     const { unread_count } = useUnreadMessageCount()
     const { data: unreadThreads } = useUnreadThreadsCount()
 
-    console.log("Unread threads", unreadThreads?.message)
     const { channels } = useContext(ChannelListContext) as ChannelListContextType
 
     const myWorkspaces: (WorkspaceFields & { unread_count: number })[] = useMemo(() => {
@@ -56,9 +55,9 @@ const WorkspacesSidebar = () => {
     }, [data, channels, unread_count, unreadThreads])
 
     return (
-        <Stack className='w-20 p-0 pb-4 border-r border-gray-4 dark:border-gray-6 h-screen' justify='between'>
-            <ScrollArea className='h-[calc(100vh-7rem)]' type="hover" scrollbars="vertical">
-                <Stack align='center' className='px-1 py-2' gap='3'>
+        <Stack className='h-screen w-14 border-r border-gray-4 bg-gray-1 p-0 pb-3 dark:border-gray-6 dark:bg-gray-1' justify='between'>
+            <ScrollArea className='h-[calc(100vh-7rem)]' type='hover' scrollbars='vertical'>
+                <Stack align='center' className='px-1.5 py-2' gap='2'>
                     {myWorkspaces.map((workspace) => (
                         <WorkspaceItem workspace={workspace} key={workspace.name} />
                     ))}
@@ -97,14 +96,14 @@ const WorkspaceItem = ({ workspace }: { workspace: WorkspaceFields & { unread_co
     }
 
     return <HStack position='relative' align='center' className='group'>
-        <Box className={clsx('w-1.5 bg-gray-12 rounded-r-full dark:bg-gray-12 absolute sm:-left-3 -left-3.5 group-hover:h-4 transition-all duration-200 ease-ease-out-cubic',
-            isSelected ? 'h-[90%] group-hover:h-[90%] group-active:h-[90%]' : 'group-active:h-4',
-            workspace.unread_count > 0 && 'h-1.5'
+        <Box className={clsx('absolute -left-2.5 w-0.5 rounded-r-full bg-accent-9 transition-all duration-150',
+            isSelected ? 'h-6' : 'h-0 group-hover:h-3',
+            workspace.unread_count > 0 && !isSelected && 'h-1.5'
         )} />
         <Flex align='center' gap='2' width='100%' justify='between' asChild>
             <Tooltip content={workspace.workspace_name} side='right'>
                 <Link aria-label={`Switch to ${workspace.workspace_name} workspace`}
-                    className={'cursor-pointer'}
+                    className='cursor-pointer rounded-[6px] outline-none focus-visible:ring-2 focus-visible:ring-accent-8'
                     to={path}
                     onClick={openWorkspace}
                 >
@@ -113,7 +112,7 @@ const WorkspaceItem = ({ workspace }: { workspace: WorkspaceFields & { unread_co
             </Tooltip>
         </Flex>
         {workspace.unread_count > 0 &&
-            <Box className='rounded-lg absolute -right-2 -bottom-1 bg-red-11 dark:bg-red-9 text-white min-w-4 p-0.5 h-4 flex items-center justify-center'>
+            <Box className='absolute -bottom-1 -right-1.5 flex h-4 min-w-4 items-center justify-center rounded-full border-2 border-gray-1 bg-red-10 px-0.5 text-white dark:border-gray-1'>
                 <Text as='span' size='1' weight='medium'>{workspace.unread_count > 99 ? '99+' : workspace.unread_count}</Text>
             </Box>
         }
@@ -133,8 +132,9 @@ const WorkspaceLogo = ({ workspace_name, logo }: { workspace_name: string, logo:
     }, [workspace_name])
     return <Box>
         <Avatar
-            size={{ sm: '3', md: '3' }}
-            className={clsx('hover:shadow-sm transition-all duration-200')}
+            size='2'
+            radius='medium'
+            className='transition-colors hover:ring-2 hover:ring-gray-5'
             color={color}
             loading='eager'
             fallback={fallback}

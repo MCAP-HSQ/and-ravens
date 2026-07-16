@@ -9,9 +9,9 @@ import { Box, DropdownMenu, Flex, IconButton } from "@radix-ui/themes";
 import { ChannelWithUnreadCount, DMChannelWithUnreadCount } from "@/components/layout/Sidebar/useGetChannelUnreadCounts";
 import clsx from "clsx";
 import { UnreadCountData } from "@/utils/channel/ChannelListProvider";
-import { BiDotsVerticalRounded } from "react-icons/bi";
 import { useFrappePostCall, useSWRConfig } from "frappe-react-sdk";
 import { toast } from "sonner";
+import FrappeIcon from '@/components/icons/FrappeIcon';
 
 interface UnreadListProps {
     unreadChannels: ChannelWithUnreadCount[]
@@ -55,8 +55,8 @@ export const UnreadList = ({ unreadChannels, unreadDMs }: UnreadListProps) => {
 
     return (
         <SidebarGroup>
-            <SidebarGroupItem className={'gap-1 pl-1'}>
-                <Flex width='100%' justify='between' align='center' gap='2' pr='2' className="group">
+            <SidebarGroupItem className='gap-1 px-2'>
+                <Flex width='100%' justify='between' align='center' gap='2' className='group'>
                     <Flex align='center' gap='2' width='100%' onClick={toggle} className="cursor-default select-none">
                         <SidebarGroupLabel>{__("Unread")}</SidebarGroupLabel>
                         <Box className={clsx('transition-opacity ease-in-out duration-200',
@@ -138,12 +138,12 @@ const UnreadSectionActions = ({ channelIDs }: { channelIDs: string[] }) => {
                 <IconButton
                     aria-label={__("Options")}
                     title={__("Options")}
-                    variant="soft"
+                    variant='ghost'
                     size="1"
-                    radius="large"
-                    className={clsx('transition-all ease-ease text-gray-10 bg-transparent hover:bg-gray-3 hover:text-gray-12'
+                    radius='medium'
+                    className={clsx('bg-transparent text-gray-9 transition-colors hover:bg-gray-3 hover:text-gray-12'
                     )}>
-                    <BiDotsVerticalRounded />
+                    <FrappeIcon name='ellipsis-vertical' size={14} />
                 </IconButton>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content>
